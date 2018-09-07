@@ -11,15 +11,14 @@ metadata:
         - minnowboard
     scope:
         - functional
-    environment
+    environment:
         - lava-test-shell
     run:
         steps:
             - git clone https://github.com/torvalds/linux.git
             - cd linux
-            - make -C tools/testing/selftests
-            - make -C tools/testing/selftests run_tests
-            - make kselftest
+            - ls -al
+            - make -C tools/testing/selftest TARGET=ptrace run_tests
     parse:
         pattern: "(?P<test_case_id>.*)\\s+(?P<result>PASS|FAIL|ERROR)\\s+"
         fixupdict:
